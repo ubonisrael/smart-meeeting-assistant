@@ -1,0 +1,18 @@
+.env
+.DS_Store
+node_modules/
+dist/
+build/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+coverage/
+uploads/
+tmp/
+.vscode/
+
+# Service repos are versioned independently.
+backend/
+frontend/
+transcription-service/
