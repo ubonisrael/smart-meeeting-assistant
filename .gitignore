@@ -11,6 +11,7 @@ coverage/
 uploads/
 tmp/
 .vscode/
+data/
 
 # Service repos are versioned independently.
 backend/

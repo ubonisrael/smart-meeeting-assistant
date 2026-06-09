@@ -16,7 +16,15 @@ This workspace contains the orchestration files and three service repositories:
 
 1. Copy `.env.example` to `.env`.
 2. Fill in Supabase Storage S3 credentials and, optionally, `OPENAI_API_KEY`.
-3. Run the stack:
+3. Run the development stack:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+```
+
+This uses the development Dockerfiles and host-mounted source/data directories.
+
+For the non-development stack, run:
 
 ```bash
 docker compose up --build
@@ -34,4 +42,3 @@ docker compose up --build
 5. The worker sends the recording to the Faster-Whisper service.
 6. The worker stores transcript segments, generates a summary, extracts action items, and marks the meeting complete.
 7. Search or ask questions across your meetings.
-

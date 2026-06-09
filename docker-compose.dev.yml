@@ -1,0 +1,47 @@
+services:
+  postgres:
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  redis:
+    command: redis-server --appendonly yes
+    volumes:
+      - ./data/redis:/data
+
+  transcription-service:
+    build:
+      context: ./transcription-service
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./transcription-service:/app
+      - ./data/whisper-cache:/root/.cache/huggingface
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - ./backend:/app
+      - backend-node-modules:/app/node_modules
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    command: npm run worker:dev
+    volumes:
+      - ./backend:/app
+      - backend-node-modules:/app/node_modules
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - frontend-node-modules:/app/node_modules
+
+volumes:
+  backend-node-modules:
+  frontend-node-modules:
