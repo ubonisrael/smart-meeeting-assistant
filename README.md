@@ -10,7 +10,7 @@ This workspace contains the orchestration files and three service repositories:
 
 - `frontend`: React, TypeScript, TailwindCSS
 - `backend`: Express, PostgreSQL, Redis, BullMQ
-- `transcription-service`: FastAPI wrapper around Faster-Whisper
+- `transcription-service`: FastAPI service that uses Gemini audio understanding for transcription
 
 ## Quick Start
 
@@ -47,6 +47,6 @@ docker compose up --build
 3. The backend stores the file in Supabase Storage and returns `processing`.
 4. BullMQ queues the processing job.
 5. The worker sends a transcription request to Redis and exits quickly.
-6. The Faster-Whisper service consumes the Redis request, downloads the recording from Supabase Storage, and pushes the transcription result back to Redis.
+6. The transcription service consumes the Redis request, downloads the recording from Supabase Storage, transcribes it with Gemini, and pushes the transcription result back to Redis.
 7. The backend worker consumes the transcription result, stores transcript segments, generates a summary, extracts action items, and marks the meeting complete.
 8. Search or ask questions across your meetings.
