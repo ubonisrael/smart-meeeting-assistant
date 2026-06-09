@@ -24,6 +24,13 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 
 This uses the development Dockerfiles and host-mounted source/data directories.
 
+If backend or frontend dependencies change while using the development stack, refresh the matching `node_modules` volume:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm backend npm install
+docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm frontend npm install
+```
+
 For the non-development stack, run:
 
 ```bash
