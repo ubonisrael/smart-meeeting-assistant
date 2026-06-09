@@ -15,7 +15,7 @@ This workspace contains the orchestration files and three service repositories:
 ## Quick Start
 
 1. Copy `.env.example` to `.env`.
-2. Fill in Supabase Storage S3 credentials and, optionally, `OPENAI_API_KEY`.
+2. Fill in Supabase Storage S3 credentials and, optionally, `GEMINI_API_KEY`.
 3. Run the development stack:
 
 ```bash
