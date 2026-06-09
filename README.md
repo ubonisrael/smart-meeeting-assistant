@@ -46,6 +46,7 @@ docker compose up --build
 2. Upload a meeting recording.
 3. The backend stores the file in Supabase Storage and returns `processing`.
 4. BullMQ queues the processing job.
-5. The worker sends the recording to the Faster-Whisper service.
-6. The worker stores transcript segments, generates a summary, extracts action items, and marks the meeting complete.
-7. Search or ask questions across your meetings.
+5. The worker sends a transcription request to Redis and exits quickly.
+6. The Faster-Whisper service consumes the Redis request, downloads the recording from Supabase Storage, and pushes the transcription result back to Redis.
+7. The backend worker consumes the transcription result, stores transcript segments, generates a summary, extracts action items, and marks the meeting complete.
+8. Search or ask questions across your meetings.
