@@ -6,11 +6,10 @@ Calendar integration is intentionally deferred until the core demo flow is compl
 
 ## Repositories
 
-This workspace contains the orchestration files and three service repositories:
+This workspace contains the orchestration files and two service repositories:
 
 - `frontend`: React, TypeScript, TailwindCSS
 - `backend`: Express, PostgreSQL, Redis, BullMQ
-- `transcription-service`: FastAPI service that uses Gemini audio understanding for transcription
 
 ## Quick Start
 
@@ -46,7 +45,5 @@ docker compose up --build
 2. Upload a meeting recording.
 3. The backend stores the file in Supabase Storage and returns `processing`.
 4. BullMQ queues the processing job.
-5. The worker sends a transcription request to Redis and exits quickly.
-6. The transcription service consumes the Redis request, downloads the recording from Supabase Storage, transcribes it with Gemini, and pushes the transcription result back to Redis.
-7. The backend worker consumes the transcription result, stores transcript segments, generates a summary, extracts action items, and marks the meeting complete.
-8. Search or ask questions across your meetings.
+5. The backend worker downloads the recording, transcribes it with Gemini, stores transcript segments, generates a summary, extracts action items, and marks the meeting complete.
+6. Search or ask questions across your meetings.

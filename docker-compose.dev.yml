@@ -8,14 +8,6 @@ services:
     volumes:
       - ./data/redis:/data
 
-  transcription-service:
-    build:
-      context: ./transcription-service
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./transcription-service:/app
-      - ./data/whisper-cache:/root/.cache/huggingface
-
   backend:
     build:
       context: ./backend

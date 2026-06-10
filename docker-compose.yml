@@ -25,14 +25,6 @@ services:
       timeout: 5s
       retries: 5
 
-  transcription-service:
-    build:
-      context: ./transcription-service
-    env_file:
-      - .env
-    ports:
-      - "${TRANSCRIPTION_PORT:-8000}:8000"
-
   backend:
     build:
       context: ./backend
@@ -45,8 +37,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-      transcription-service:
-        condition: service_started
 
   worker:
     build:
@@ -59,8 +49,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-      transcription-service:
-        condition: service_started
 
   frontend:
     build:
